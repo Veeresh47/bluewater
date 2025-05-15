@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven'       // Your Maven tool name configured in Jenkins
-        jdk 'JDK17'         // Your JDK tool name configured in Jenkins
+        maven 'Maven'       // Must match name in Jenkins Global Tool Config
+        jdk 'JDK17'         // Must match name in Jenkins Global Tool Config
     }
 
     stages {
@@ -14,17 +14,17 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                bat 'mvn clean package'
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }
         stage('Run') {
             steps {
-                sh 'java -cp target/hello-world-1.0-SNAPSHOT.jar com.example.App'
+                bat 'java -cp target/hello-world-1.0-SNAPSHOT.jar com.example.App'
             }
         }
     }
