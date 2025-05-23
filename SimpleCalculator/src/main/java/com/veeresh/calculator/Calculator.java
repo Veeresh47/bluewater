@@ -1,37 +1,23 @@
 package com.veeresh.calculator;
 
-import java.util.Scanner;
-
 public class Calculator {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("Simple Calculator");
-        System.out.print("Enter first number: ");
-        double a = sc.nextDouble();
-
-        System.out.print("Enter operator (+, -, *, /): ");
-        char op = sc.next().charAt(0);
-
-        System.out.print("Enter second number: ");
-        double b = sc.nextDouble();
-
-        double result = 0;
-
-        switch (op) {
-            case '+': result = a + b; break;
-            case '-': result = a - b; break;
-            case '*': result = a * b; break;
-            case '/': 
-                if (b != 0) result = a / b;
-                else {
-                    System.out.println("Error: Division by zero");
-                    return;
-                }
-                break;
-            default: System.out.println("Invalid operator"); return;
+        if(args.length != 2) {
+            System.out.println("Usage: java Calculator <number1> <number2>");
+            return;
         }
 
-        System.out.println("Result: " + result);
+        double a = Double.parseDouble(args[0]);
+        double b = Double.parseDouble(args[1]);
+
+        System.out.println(a + " + " + b + " = " + (a + b));
+        System.out.println(a + " - " + b + " = " + (a - b));
+        System.out.println(a + " * " + b + " = " + (a * b));
+        
+        if (b != 0) {
+            System.out.println(a + " / " + b + " = " + (a / b));
+        } else {
+            System.out.println("Error: Division by zero");
+        }
     }
 }
