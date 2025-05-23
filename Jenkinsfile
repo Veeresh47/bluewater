@@ -2,29 +2,35 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven'
-        jdk 'JDK17'
+        maven 'Maven 3.9.4'  // Replace this with your Jenkins Maven tool name
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/Veeresh47/bluewater.git', branch: 'main'
+                git branch: 'main', url: 'https://github.com/Veeresh47/bluewater.git'
             }
         }
+
         stage('Build') {
             steps {
-                bat 'mvn clean package'
+                dir('SimpleCalculator') {
+                    bat 'mvn clean package'
+                }
             }
         }
+
         stage('Test') {
             steps {
-                bat 'mvn test'
+                dir('SimpleCalculator') {
+                    bat 'mvn test'
+                }
             }
         }
-        stage('Run') {
+
+        stage('Deploy') {
             steps {
-                bat 'java -cp target/hello-0.0.1-SNAPSHOT.jar com.maventogradle.App'
+                echo 'Deployment steps go here...'
             }
         }
     }
